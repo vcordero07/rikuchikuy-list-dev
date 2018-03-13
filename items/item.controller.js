@@ -39,48 +39,29 @@ exports.getSingleItem = (req, res) => {
 
 // exports.deleteItem = async (req, res) => {
 //   try {
-//     const listID = req.params.listId;
-//     const itemID = req.params.id;
-//     const promises = await List.findOneAndUpdate(
-//       { _id: listID },
-//       { $pull: { _items: itemID } },
-//       { safe: true }
-//     );
-//     console.log('pr:',pr);
-//     await Promise.all(promises);
-//     await Item.findByIdAndRemove(itemID);
-//     res.sendStatus(201).json();
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).send(err);
+//     await List.findByIdAndUpdate(req.params.listId, {
+//       $pull: { _items: req.params.id }
+//     });
+//     await Item.findByIdAndRemove(req.params.id);
+//
+//     res.sendStatus(201).json(item.serialize());
+//   } catch (error) {
+//     res.status(400).json({
+//       error
+//     });
 //   }
 // };
 
-exports.deleteItem = async (req, res) => {
-  try {
-    await List.findByIdAndUpdate(req.params.listId, {
-      $pull: { _items: req.params.id }
-    });
-    await Item.findByIdAndRemove(req.params.id);
-
-    res.sendStatus(201).json(item.serialize());
-  } catch (error) {
-    res.status(400).json({
-      error
-    });
-  }
+exports.deleteItem = (req, res) => {
+  Item.findByIdAndRemove(req.params.id)
+    .then(item => {
+      console.log(`deleted item from db`);
+      res.status(201).json(item.serialize());
+    })
+    .catch(err =>
+      res.status(500).json({ message: "Internal server error: deleteItem" })
+    );
 };
-
-// exports.deleteItem = (req, res) => {
-//   Item.findByIdAndRemove(req.params.id)
-//     .then(item => {
-//       console.log(`deleted item from db`);
-//       res.status(201).json(item.serialize());
-//     })
-//     .catch(err =>
-//       res.status(500).json({ message: "Internal server error: deleteItem" })
-//     );
-// };
 
 exports.newItem = (req, res) => {
   console.log("req.body:", req.body);
