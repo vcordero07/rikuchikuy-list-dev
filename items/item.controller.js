@@ -63,7 +63,7 @@ exports.deleteItem = async (req, res) => {
     });
     await Item.findByIdAndRemove(req.params.id);
 
-    res.sendStatus(204);
+    res.sendStatus(201).json(item.serialize());
   } catch (error) {
     res.status(400).json({
       error
