@@ -12,7 +12,8 @@ exports.getAllUsers = (req, res) => {
 };
 
 exports.getSingleUser = (req, res) => {
-  User.findById(req.params.id)
+  // console.log("req.user.id:", req.user.id);
+  User.findById(req.user.id)
     .populate({ path: "_list" })
     .exec()
     .then(user => res.json(user.serialize()))
