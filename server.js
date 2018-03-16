@@ -14,6 +14,7 @@ const {
   localStrategy,
   jwtStrategy
 } = require("./auth/auth.index");
+const { router: urlRouter } = require("./url/url.index");
 
 mongoose.Promise = global.Promise;
 
@@ -41,6 +42,7 @@ app.use("/api/auth/", authRouter);
 app.use("/api/users/", usersRouter);
 app.use("/api/lists/", listsRouter);
 app.use("/api/lists/", itemsRouter);
+app.use("/api/url/", urlRouter);
 
 const jwtAuth = passport.authenticate("jwt", { session: false });
 
