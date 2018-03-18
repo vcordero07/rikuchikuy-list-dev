@@ -3,9 +3,9 @@ const { Item } = require("./item.model");
 const { List } = require("../lists/list.model");
 
 exports.getAllItems2 = (req, res) => {
-  // console.log("req.params: ", req.params);
+  // //console.log("req.params: ", req.params);
   const listId = req.params.listId;
-  // console.log("listId: ", listId);
+  // //console.log("listId: ", listId);
   return Item.find({ _list: listId })
     .sort({ created: -1 })
     .populate("_list")
@@ -55,7 +55,7 @@ exports.getSingleItem = (req, res) => {
 exports.deleteItem = (req, res) => {
   Item.findByIdAndRemove(req.params.id)
     .then(item => {
-      console.log(`deleted item from db`);
+      //console.log(`deleted item from db`);
       res.status(201).json(item.serialize());
     })
     .catch(err =>
@@ -64,7 +64,7 @@ exports.deleteItem = (req, res) => {
 };
 
 exports.newItem = (req, res) => {
-  console.log("req.body:", req.body);
+  //console.log("req.body:", req.body);
   if (!req.body.title) {
     return res
       .status(400)
@@ -83,8 +83,8 @@ exports.newItem = (req, res) => {
     //
   })
     .then(data => {
-      // console.log("data:", data);
-      // console.log("req.params.listId:", req.params.listId);
+      // //console.log("data:", data);
+      // //console.log("req.params.listId:", req.params.listId);
       return List.findByIdAndUpdate(req.params.listId, {
         $push: { _items: data._id }
       }).then(() => data);
@@ -101,7 +101,7 @@ exports.newItem = (req, res) => {
 exports.updateItem = (req, res) => {
   const upItem = {};
   const updateableFields = ["title", "completed", "link", "price", "note"];
-  console.log("updateItem req.body:", req.body);
+  //console.log("updateItem req.body:", req.body);
   updateableFields.forEach(field => {
     if (field in req.body) {
       upItem[field] = req.body[field];

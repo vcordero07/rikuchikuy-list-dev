@@ -37,9 +37,9 @@ const addHtpp = url => {
 
 // make a unique short url + add http if not before saving
 UrlSchema.pre("save", function(next, done) {
-  console.log("hello");
+  //console.log("hello");
   this.shortUrl = makeUniqueUrl(6);
-  console.log("this.shortUrl:", this.shortUrl);
+  //console.log("this.shortUrl:", this.shortUrl);
   this.longUrl = addHtpp(this.longUrl);
   // if we have already this shortUrl we just keep doing until we have a random one
   mongoose.models.Url.findOne({ shortUrl: this.shortUrl })

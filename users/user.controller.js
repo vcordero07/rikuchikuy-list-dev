@@ -12,7 +12,7 @@ exports.getAllUsers = (req, res) => {
 };
 
 exports.getSingleUser = (req, res) => {
-  // console.log("req.user.id:", req.user.id);
+  // //console.log("req.user.id:", req.user.id);
   User.findById(req.user.id)
     .populate({ path: "_list" })
     .exec()
@@ -23,14 +23,14 @@ exports.getSingleUser = (req, res) => {
 };
 
 exports.updateUser = (req, res) => {
-  console.log(typeof req.body.username === "undefined");
+  //console.log(typeof req.body.username === "undefined");
   User.findByIdAndUpdate(req.params.id, {
     username: req.body.username,
     email: req.body.email
   })
     .then(u => res.status(202).json(u.serialize()))
     .catch(err => {
-      console.log("err:", err);
+      //console.log("err:", err);
       res.status(500).json({ meesage: "Internal server error: updateUser" });
     });
 };
@@ -38,7 +38,7 @@ exports.updateUser = (req, res) => {
 exports.deleteUser = (req, res) => {
   User.findByIdAndRemove(req.params.id)
     .then(() => {
-      console.log(`deleted user from db`);
+      //console.log(`deleted user from db`);
       res.status(204).end();
     })
     .catch(err =>
@@ -47,7 +47,7 @@ exports.deleteUser = (req, res) => {
 };
 
 exports.newUser = (req, res) => {
-  console.log("req.body:", req.body);
+  //console.log("req.body:", req.body);
   const requiredFields = ["username", "password"];
   const missingField = requiredFields.find(field => !(field in req.body));
 

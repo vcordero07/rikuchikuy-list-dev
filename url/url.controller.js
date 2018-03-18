@@ -34,7 +34,7 @@ exports.createShort = (req, res) => {
           .then(u => res.status(201).json({ success: true, url: u }))
 
           .catch(err => {
-            console.log("err:", err);
+            //console.log("err:", err);
             let errors;
             if (err.code === 11000) {
               errors = "This url is already use";
@@ -51,7 +51,7 @@ exports.createShort = (req, res) => {
 exports.redirectLong = (req, res) => {
   const { shortUrl } = req.params;
 
-  console.log("HELLO", { shortUrl });
+  //console.log("HELLO", { shortUrl });
 
   return Url.findOneAndUpdate({ shortUrl }, { $inc: { visits: 1 } })
     .then(url => {
@@ -63,7 +63,7 @@ exports.redirectLong = (req, res) => {
         });
       }
       // we redirect to external url
-      console.log("URL", { url });
+      //console.log("URL", { url });
       return res.redirect(url.longUrl);
     })
     .catch(err => res.redirect("/").json({ success: false, message: err }));
