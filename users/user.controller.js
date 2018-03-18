@@ -47,6 +47,7 @@ exports.deleteUser = (req, res) => {
 };
 
 exports.newUser = (req, res) => {
+  console.log("req.body:", req.body);
   const requiredFields = ["username", "password"];
   const missingField = requiredFields.find(field => !(field in req.body));
 
