@@ -100,7 +100,14 @@ exports.newItem = (req, res) => {
 
 exports.updateItem = (req, res) => {
   const upItem = {};
-  const updateableFields = ["title", "completed", "link", "price", "note"];
+  const updateableFields = [
+    "title",
+    "completed",
+    "link",
+    "price",
+    "note",
+    "bgcolor"
+  ];
   //console.log("updateItem req.body:", req.body);
   updateableFields.forEach(field => {
     if (field in req.body) {

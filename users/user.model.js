@@ -6,8 +6,8 @@ const { List } = require("../lists/list.model");
 const UserSchema = mongoose.Schema({
   username: {
     type: String,
-    requried: true
-    // unique: true //ask emanuel about updating user with unique field.
+    requried: true,
+    unique: true //ask emanuel about updating user with unique field.
   },
   password: {
     type: String,

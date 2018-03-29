@@ -9,7 +9,7 @@ const itemSchema = mongoose.Schema({
   link: { type: String, default: "" },
   price: { type: Number, default: 0 },
   completed: { type: Boolean, default: false },
-  bgcolor: { type: String, default: "#fff" },
+  bgcolor: { type: String, default: "#ffffff" },
   note: { type: String, default: "" },
   _list: {
     type: mongoose.Schema.Types.ObjectId,
@@ -27,6 +27,7 @@ itemSchema.methods.serialize = function() {
     completed: this.completed,
     note: this.note,
     _list: this._list,
+    bgcolor: this.bgcolor,
     created: this.created
   };
 };

@@ -124,7 +124,7 @@ exports.newUser = (req, res) => {
   let { username, password, email = "" } = req.body;
 
   email = email.trim();
-
+  //need to reject user password if is the same.
   return User.find({ username })
     .count()
     .then(count => {
