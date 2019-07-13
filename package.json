@@ -20,7 +20,7 @@
     "morgan": "^1.7.0",
     "nodemon": "^1.14.12",
     "passport": "^0.3.2",
-    "passport-jwt": "^2.2.1",
+    "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
